@@ -1,11 +1,7 @@
 # vectorTilesDemo
 Vectortiles demo
 
-Install stuff with
-npm install
-
-Start the local devserver at http://localhost:1234
-npm start
-
-Build it for deploying
-npm run build
+1. Install nodejs, make sure you can run the commands "node" and "npm" in your preferred command line 
+2. Install $ npm install
+3. Start the local devserver at http://localhost:1234 with $ npm start
+4. Build it for deploying $ npm run build
