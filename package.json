@@ -1,0 +1,27 @@
+{
+  "name": "vectortilesdemo",
+  "version": "1.0.0",
+  "description": "VectorTiles demo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartverket/vectorTilesDemo.git"
+  },
+  "author": "Kartverket",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kartverket/vectorTilesDemo/issues"
+  },
+  "homepage": "https://github.com/kartverket/vectorTilesDemo#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "ol": "5.3.0",
+    "ol-mapbox-style": "^3.6.2"
+  },
+  "devDependencies": {
+    "parcel": "1.11.0"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build --experimental-scope-hoisting --public-url . index.html"
+  }
+}

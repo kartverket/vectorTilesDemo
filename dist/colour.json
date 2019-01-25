@@ -1,0 +1,691 @@
+{
+    "version": 8,
+    "name": "colour",
+    "sources": {
+      "s57": {
+        "type": "vector",
+        "url": "https://primar.ecc.no/primar/vectortile_ip/halsett/cells.json"
+      },
+      "compass": {
+        "type": "vector",
+        "tiles": ["http://wms.geonorge.no/skwms1/wmstest.dybde_vt?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=all&map.imagetype=mvt"]
+      },"kartdata": {
+        "type": "vector",
+        "tiles": ["http://wms.geonorge.no/skwms1/wmstest.kartdata2_vt?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=all&map.imagetype=mvt"]
+      }
+    },
+    "center": [10.746, 59.9],
+    "zoom": 12,
+    "sprite": "https://cdn.maplytic.no/kartverket.maplytic.no/dnl/sprite/s52",
+    "glyphs": "https://cdn.maplytic.no/halset.maplytic.no/glyphs/{fontstack}/{range}.pbf",
+    "layers": [
+      {
+        "id": "background",
+        "type": "background",
+        "paint": {
+          "background-color": "rgba(240,234,220,1)"
+        }
+      },{
+        "id": "N50Arealdekkeflate",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "paint": {
+          "fill-color": {
+            "property": "objtype",
+            "stops": [[1,"rgba(215,215,215,1)"],[2,"rgba(215,215,215,1)"]]},
+            "fill-outline-color": {
+            "property": "objtype",
+            "stops": [[3,"rgba(1,1,1,1)"]]}
+        }
+      },{
+        "id": "Skog",
+        "maxzoom": 24,
+        "minzoom": 0,
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "Skog"],
+        "paint": {
+          "fill-color": "#cee2bd"
+        }
+      },{
+        "id": "DyrketMark",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "DyrketMark"],
+        "paint": {
+          "fill-color": "#dfe5c8"
+        }
+      },{
+        "id": "ÅpentOmråde",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "ÅpentOmråde"],
+        "paint": {
+          "fill-color": "#cee2bd"
+        }
+      },{
+        "id": "Myr",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "Myr"],
+        "paint": {
+          "fill-color": "#cdd"
+        }
+      },{
+        "id": "SnøIsbre",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "SnøIsbre"],
+        "paint": {
+          "fill-color": "#f4f8ff"
+        }
+      },{
+        "id": "Dybdelag",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "Dybdelag",
+        "paint": {
+          "fill-color": {
+            "property": "dybdeverdi_min",
+            "stops": [[10,"rgba(219,245,255,1)"],[20,"rgba(209,242,255,1)"],[30,"rgba(199,242,255,1)"],[40,"rgba(195,241,255,1)"],[50,"rgba(189,239,255,1)"],
+              [100,"rgba(184,237,255,1)"],[150,"rgba(171,232,255,1)"],[200,"rgba(166,229,255,1)"],[250,"rgba(161,229,255,1)"],
+              [300,"rgba(156,227,255,1)"],[350,"rgba(150,227,255,1)"],[400,"rgba(145,224,255,1)"],[450,"rgba(140,224,255,1)"],
+              [500,"rgba(137,222,255,1)"],[2000,"rgba(135,220,255,1)"]]
+          }
+        }
+      },{
+        "interactive": true,
+        "id": "Dybdekontur",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Dybdekontur",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(173,173,173,1)"
+        }
+      },{
+        "id": "Dybdekontur-label",
+        "type": "symbol",
+        "source": "compass",
+        "source-layer": "Dybdekontur",
+        "minzoom":12,
+        "layout": {
+          "visibility": "visible",
+          "text-font": [
+            "Open Sans Regular"
+          ],
+          "text-size": 10,
+          "text-field": "{dybdeverdi_kontur}"
+        },
+        "paint": {
+          "text-color": "#000000",
+          "text-halo-width": 1.5,
+          "text-halo-color": "rgba(255,255,255,0.7)"
+        }
+      },{
+        "interactive": true,
+        "id": "Torrfall_Grense",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Torrfall_Grense",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(160,160,160,1)"
+        }
+      },{
+        "id": "Torrfall",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "Torrfall",
+        "paint": {
+          "fill-color": "rgba(225,225,225,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "MudretOmrade_Grense",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "MudretOmrade_Grense",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(190,190,190,1)",
+          "line-dasharray": [5, 5]
+        }
+      },{
+        "id": "MudretOmrade",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "MudretOmrade",
+        "paint": {
+          "fill-color": "rgba(254,254,254,1)"
+        }
+      },{
+        "id": "grunne-label",
+        "type": "symbol",
+        "source": "compass",
+        "source-layer": "grunne",
+        "minzoom":10,
+        "layout": {
+          "visibility": "visible",
+          "text-font": [
+            "Open Sans Regular"
+          ],
+          "text-size": 8,
+          "text-field": "{dybdeverdi}"
+        },
+        "paint": {
+          "text-color": "rgba(50,50,50,1)",
+          "text-halo-width": 1.5,
+          "text-halo-color": "rgba(254,254,254,1)"
+        }
+      },{
+        "id": "Flytebrygge",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "Flytebrygge",
+        "paint": {
+          "fill-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "Flytebrygge_Grense",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Flytebrygge_Grense",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "flytebrygge_l",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "flytebrygge_l",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Flytedokk",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "Flytedokk",
+        "paint": {
+          "fill-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "flytedokk_grense",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "flytedokk_grense",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Torrdokk",
+        "type": "fill",
+        "source": "compass",
+        "source-layer": "Torrdokk",
+        "paint": {
+          "fill-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "Torrdokk_Grense",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Torrdokk_Grense",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "skjaer_punkt",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "skjaer_punkt",
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 3,
+          "circle-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Dybdepunkt-label",
+        "type": "symbol",
+        "source": "compass",
+        "source-layer": "Dybdepunkt",
+        "layout": {
+          "visibility": "visible",
+          "text-font": [
+            "Open Sans Regular"
+          ],
+          "text-size": 8,
+          "text-field": "{dybdeverdi}"
+        },
+        "paint": {
+          "text-color": "rgba(153,153,153,1)",
+          "text-halo-width": 1.5,
+          "text-halo-color": "rgba(254,254,254,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "Konstruertkystkontur",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Konstruertkystkontur",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "konst_kyst_l",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "konst_kyst_l",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "Kystkontur",
+        "type": "line",
+        "source": "compass",
+        "source-layer": "Kystkontur",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Park",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Arealdekkeflate",
+        "filter": ["==", "objtype", "Park"],
+        "paint": {
+          "fill-color": "#cee2bd"
+        }
+      },{
+        "id": "N50Vannflate",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Vannflate",
+        "paint": {
+          "fill-color": {
+            "property": "objtype",
+            "stops": [[1,"rgba(224,254,254,1)"],[2,"rgba(224,254,254,1)"]]},
+            "fill-outline-color": {
+            "property": "objtype",
+            "stops": [[1,"rgba(224,254,254,1)"],[2,"rgba(224,254,254,1)"]]}
+        }
+      },{
+        "id": "N50Bygningsflate",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Bygningsflate",
+        "paint": {
+          "fill-color": "rgba(152,95,32,1)"
+        }
+      },{
+        "id": "N50Tankflate",
+        "type": "fill",
+        "source": "kartdata",
+        "source-layer": "N50Tankflate",
+        "paint": {
+          "fill-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Vannkontur",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Vannkontur",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(0,166,254,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Elver",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Elver",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(0,166,254,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Flomlop",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Flomlop",
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(0,166,254,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Hoydekurver",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Hoydekurver",
+        "paint": {
+          "line-width": 0.5,
+          "line-color": "rgba(200,133,70,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Skytefeltgrense",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Skytefeltgrense",
+        "paint": {
+          "line-width": 2,
+          "line-color": "rgba(254,200,254,1)"
+        }
+      },{
+        "interactive": true,
+        "id": "N50Naturvernegrense",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Verneomradegrense",
+        "paint": {
+          "line-width": 1.3,
+          "line-color": "rgba(1,156,1,1)"
+        }
+      },{
+        "id": "N50Jernbane",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Jernbane",
+        "paint": {
+          "line-width": 5,
+          "line-color": "#AAA",
+          "line-dasharray": [0.1, 1.8]
+        }
+      },{
+        "id": "Luftledning",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Anleggslinje",
+        "filter": ["==", "objtype", "LuftledningLH"],
+        "paint": {
+          "line-width": 0.8,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Molo",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Anleggslinje",
+        "filter": ["==", "objtype", "Molo"],
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Dam",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Anleggslinje",
+        "filter": ["==", "objtype", "Dam"],
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "KaiBrygge",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Anleggslinje",
+        "filter": ["==", "objtype", "KaiBrygge"],
+        "paint": {
+          "line-width": 1,
+          "line-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Gruve",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Anleggspunkt",
+        "filter": ["==", "objtype", "Gruve"],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 7,
+          "circle-color": "rgba(1,1,1,1)"
+        }
+      },{
+        "id": "Tank",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Anleggspunkt",
+        "filter": ["==", "objtype", "Tank"],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 3,
+          "circle-color": "rgba(51,51,51,1)"
+        }
+      },{
+        "id": "Navigasjonsinstallasjon",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Anleggspunkt",
+        "filter": ["==", "objtype", "Navigasjonsinstallasjon"],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 3,
+          "circle-color": "rgba(1,251,1,1)"
+        }
+      },{
+        "id": "Tårn",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Anleggspunkt",
+        "filter": ["==", "objtype", "Tårn"],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 7,
+          "circle-color": "rgba(1,1,150,1)"
+        }
+      },{
+        "id": "Bolig",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Bygningspunkt",
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 8,
+          "circle-color": "rgba(154,95,33,1)"
+        }
+      },{
+        "id": "Heli",
+        "type": "circle",
+        "source": "compass",
+        "source-layer": "N50Arealdekkepunkt",
+        "filter": ["==", "lufthavntype", "H"],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "circle-radius": 8,
+          "circle-color": "rgba(154,95,33,1)"
+        }
+      },{
+        "id": "N50Bilveg",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Bilveg",
+        "filter": ["!=", "medium", "U"],
+        "paint": {
+          "line-width": 1.5,
+          "line-color": "#AAA"
+        }
+      },{
+        "id": "Tunnel",
+        "type": "line",
+        "source": "kartdata",
+        "source-layer": "N50Bilveg",
+        "filter": ["==", "medium", "U"],
+        "paint": {
+          "line-width": 1.5,
+          "line-color": "#AAA",
+          "line-dasharray": [4, 2]
+        }
+      },{
+        "id": "LIGHTS_LEG",
+        "type": "line",
+        "source": "s57",
+        "source-layer": "LIGHTS_LEG",
+        "paint": {
+          "line-color": "#000000",
+          "line-width": 0.2,
+          "line-opacity": 1
+        }
+      },
+      {
+        "id": "LIGHTS_ARC_BG",
+        "type": "line",
+        "source": "s57",
+        "source-layer": "LIGHTS_ARC",
+        "paint": {
+          "line-color": "#000000",
+          "line-width": 5,
+          "line-opacity": 0.5
+        }
+      },
+      {
+        "id": "LIGHTS_ARC_1",
+        "type": "line",
+        "source": "s57",
+        "source-layer": "LIGHTS_ARC",
+        "filter": [
+          "==",
+          "COLOUR",
+          "1"
+        ],
+        "paint": {
+          "line-color": "#e4df35",
+          "line-width": 3,
+          "line-opacity": 1
+        }
+      },
+      {
+        "id": "LIGHTS_ARC_3",
+        "type": "line",
+        "source": "s57",
+        "source-layer": "LIGHTS_ARC",
+        "filter": [
+          "==",
+          "COLOUR",
+          "3"
+        ],
+        "paint": {
+          "line-color": "#ea5470",
+          "line-width": 3,
+          "line-opacity": 1
+        }
+      },
+      {
+        "id": "LIGHTS_ARC_4",
+        "type": "line",
+        "source": "s57",
+        "source-layer": "LIGHTS_ARC",
+        "filter": [
+          "==",
+          "COLOUR",
+          "4"
+        ],
+        "paint": {
+          "line-color": "#61e637",
+          "line-width": 3,
+          "line-opacity": 1
+        }
+      },{
+        "id": "S52_SYMBOL",
+        "type": "symbol",
+        "source": "s57",
+        "source-layer": "S52_SYMBOL",
+        "filter": [
+          "all",
+          ["none", [ ">=", "ROTATE", 0 ], [ "<=", "ROTATE", 360 ]],
+          [
+            "!in",
+            "OBCL",
+            "UWTROC",
+            "SOUNDG",
+            "BUAARE",
+            "LNDARE",
+            "LNDRGN"
+          ]
+        ],
+        "layout": {
+          "icon-image": "{SYMBOL}",
+          "icon-allow-overlap": true
+        }
+      },
+      {
+        "id": "S52_SYMBOL_135",
+        "type": "symbol",
+        "source": "s57",
+        "source-layer": "S52_SYMBOL",
+        "filter": [
+          "all",
+          [
+            "==",
+            "ROTATE",
+            135
+          ],
+          [
+            "!in",
+            "OBCL",
+            "UWTROC",
+            "SOUNDG",
+            "BUAARE",
+            "LNDARE",
+            "LNDRGN"
+          ]
+        ],
+        "layout": {
+          "icon-image": "{SYMBOL}",
+          "icon-allow-overlap": true,
+          "icon-rotate": 135
+        }
+      },{
+        "id": "Flyplass",
+        "type": "symbol",
+        "source": "compass",
+        "source-layer": "N50Arealdekkepunkt",
+        "filter": ["==", "lufthavntype", "L"],
+        "layout": {
+          "icon-image": "airport.svg",
+          "icon-size":1.5
+        },
+        "paint": {}
+      }
+  
+    ]
+  }
