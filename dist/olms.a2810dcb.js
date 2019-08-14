@@ -76083,8 +76083,9 @@ var _olMapboxStyle = _interopRequireDefault(require("ol-mapbox-style"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//olms('map', 'colour.json'); //colour.json as local copy with minor fix (center,zoom,stops)
-(0, _olMapboxStyle.default)('map', 'http://nnriap587/vt/mapserv/colour.json');
+(0, _olMapboxStyle.default)('map', 'colour.json'); //colour.json as local copy with minor fix (center,zoom,stops)
+//olms('map', 'http://nnriap587/vt/mapserv/colour.json');
+//(0, _olMapboxStyle.default)('map', 'http://nnriap587/vt/dnl/colour.json');
 },{"ol/ol.css":"node_modules/ol/ol.css","ol-mapbox-style":"node_modules/ol-mapbox-style/index.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -76113,7 +76114,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58131" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62965" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
