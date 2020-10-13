@@ -12,70 +12,64 @@ import { fromLonLat } from "ol/proj";
 
 import { createVectorStyle } from "./createVectorStyle";
 
-import stylefunction from 'ol-mapbox-style/stylefunction';
+import stylefunction from 'ol-mapbox-style/dist/stylefunction';
 
-import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
+import { _getFonts } from 'ol-mapbox-style';
 
-var colorStyle;
-
-var kartdata500_vt = new VectorTileLayer({
+var kartdata = new VectorTileLayer({
   declutter: true,
   source: new VectorTileSource({
     attributions: '© <a href="https://www.kartverket.no/">Kartverket</a>',
     format: new MVT(),
     url:
-      "http://wms.geonorge.no/skwms1/wmstest.kartdata500_vt?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=all&map.imagetype=mvt"    
-  }),
-  style: createDefaultStyle()
-});
+      "http://dcriap511/mapcache/gmaps/kartdata_vt@googlemaps/{z}/{x}/{y}.mvt"
 
-var kartdata2_vt = new VectorTileLayer({
-  declutter: true,
-  source: new VectorTileSource({
-    attributions: '© <a href="https://www.kartverket.no/">Kartverket</a>',
-    format: new MVT(),
-    url:
-      "http://wms.geonorge.no/skwms1/wmstest.kartdata2_vt?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=all&map.imagetype=mvt"
   })
 });
 
-/*
-$.getJSON( "http://nnriap587/vt/mapserv/colour.json", function( json ) {
-    kartdata2_vt.setStyle(createVectorStyle(Style, Fill, Stroke, Icon, Text, json));
- })
-*/
- fetch('http://nnriap587/vt/mapserv/colour.json')
+var map = new Map({
+  //layers: [ kartdata],
+  target: "map",
+  view: new View({
+    zoom: 13,
+    center: fromLonLat([10.75, 59.91])
+  })
+});
+
+/** Show some info, nice to have while developing */
+map.on('pointermove', showInfo);
+var info = document.getElementById('info');
+function showInfo(event) {
+  var features = map.getFeaturesAtPixel(event.pixel);
+  if (features.length == 0) {
+    info.innerText = '';
+    info.style.opacity = 0;
+    return;
+  }
+  var properties = features[0].getProperties();
+  info.innerText = JSON.stringify(properties, null, 2);
+  info.style.opacity = 1;
+}
+
+/** Init Fonts ? (this should not be nesessary, but it is) */
+var fonts = ["Open Sans Regular"];
+var test = _getFonts(fonts);
+
+/** Get the mapbox style and add a layer to the map */
+fetch('http://nnriap587.statkart.no/static/styles/topo4/style_cm.json')
  .then(r => r.json())
  .then((glStyle) => {
   var layers = glStyle.layers;
   layers.forEach(el => {
     if (el.id && el.source) {
-      console.log(el.id);
-      // stylefunction(kartdata2_vt, glStyle, el.id);
+      console.log(el.id); // print the layers from the style
+      //stylefunction(kartdata, glStyle, el.id);
     }
   });
-  stylefunction(kartdata2_vt, glStyle, 'N50Hoydekurver');
-  stylefunction(kartdata2_vt, glStyle, 'Skog');
-  if (map.getLayers().getArray().indexOf(kartdata2_vt) === -1) {    
-    map.addLayer(kartdata2_vt);
+  //applyBackground(map, glStyle);
+  //stylefunction(kartdata, glStyle, 'bygningsflate');  
+  stylefunction(kartdata, glStyle, 'topo4_cache');
+  if (map.getLayers().getArray().indexOf(kartdata) === -1) {    
+    map.addLayer(kartdata);
   }
-});
-var bgkLayer = new TileLayer({
-  source: new TileWMS({
-    url: "http://opencache.statkart.no/gatekeeper/gk/gk.open?",
-    params: {
-      LAYERS: "topo4graatone",
-      VERSION: "1.1.1"
-    }
-  })
-});
-var map = new Map({
-  //layers: [ //bgkLayer, //, kartdata500_vt kartdata2_vt
-  //],
-  target: "map",
-  view: new View({
-    zoom: 13,
-    center: fromLonLat([10.746, 59.9])
-  })
 });
