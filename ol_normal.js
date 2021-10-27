@@ -16,14 +16,30 @@ import stylefunction from 'ol-mapbox-style/dist/stylefunction';
 
 import { _getFonts } from 'ol-mapbox-style';
 
+import proj4 from 'proj4';
+import {addProjection, getTransform, Projection} from 'ol/proj';
+import {register} from 'ol/proj/proj4';
+
+// Define 25833
+proj4.defs("EPSG:25833", "+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs");
+register(proj4);
+var extent = {
+  'EPSG:25833': [-2500000, 3500000, 3045984, 9045984]
+};
+const projection25833 = new Projection({
+  code: 'EPSG:25833',
+  units: 'm',
+  extent: extent['EPSG:25833']
+});
+addProjection(projection25833);
+
 var kartdata = new VectorTileLayer({
   declutter: true,
   source: new VectorTileSource({
     attributions: '© <a href="https://www.kartverket.no/">Kartverket</a>',
     format: new MVT(),
-    url:
-      "http://dcriap511/mapcache/gmaps/kartdata_vt@googlemaps/{z}/{x}/{y}.mvt"
-
+    //projection: projection25833, // not sure if this is needed here
+    url: "https://cache.kartverket.no/test/vectortiles/landtopo/utm33/{z}/{x}/{y}.mvt"
   })
 });
 
@@ -32,6 +48,7 @@ var map = new Map({
   target: "map",
   view: new View({
     zoom: 13,
+    projection: projection25833, // set 25833 as main projection
     center: fromLonLat([10.75, 59.91])
   })
 });
@@ -56,7 +73,7 @@ var fonts = ["Open Sans Regular"];
 var test = _getFonts(fonts);
 
 /** Get the mapbox style and add a layer to the map */
-fetch('http://nnriap587.statkart.no/static/styles/topo4/style_cm.json')
+fetch('https://cache.kartverket.no/test/styles/landtopo.json')
  .then(r => r.json())
  .then((glStyle) => {
   var layers = glStyle.layers;
