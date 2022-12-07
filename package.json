@@ -13,15 +13,16 @@
   },
   "homepage": "https://github.com/kartverket/vectorTilesDemo#readme",
   "dependencies": {
-    "jquery": "^3.5.1",
-    "ol": "6.4.3",
-    "ol-mapbox-style": "^6.1.2"
+    "jquery": "^3.6.1",
+    "ol": "^7.1.0",
+    "ol-mapbox-style": "^9.2.4"
   },
   "devDependencies": {
-    "parcel": "1.12.4"
+    "buffer": "^5.7.1",
+    "parcel": "^2.8.0"
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build --experimental-scope-hoisting --public-url . index.html"
+    "build": "parcel build --public-url . index.html"
   }
 }
