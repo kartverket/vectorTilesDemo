@@ -1,4 +1,4 @@
 import 'ol/ol.css';
 import olms from 'ol-mapbox-style';
 
-olms('map', 'https://cache.kartverket.no/test/styles/landtopo.json');
+olms('map', 'https://vectortiles.kartverket.no/styles/test/landtopo/style.json');
