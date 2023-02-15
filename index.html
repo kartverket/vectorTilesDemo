@@ -21,9 +21,16 @@
             <div class="card-body">
                 <div class="form-group">
                     <select class="custom-select custom-select-sm" id="styles">
-                        <option value="style.json">Topografisk norgeskart</option>
-                        <option value="style_graatone.json">Topografisk gråtone</option>
-                        <option value="style_grunnkart.json">Norges grunnkart</option>
+                        <option value="landtopo">Topografisk norgeskart</option>
+                        <option value="landtopo_graatone">Topografisk gråtone</option>
+                        <option value="norges_grunnkart">Norges grunnkart</option>
+                        <option value="adm_enheter">Administrative enheter</option>
+                        <option value="enkel">Enkel</option>
+                        <option value="tekst">Tekst</option>
+                        
+                        <option value="arcticsdi">ARCTIC SDI - dev</option>
+                        <option value="wip">Test</option>
+
                     </select>
                 </div>
                 <fieldset class="form-group">
@@ -73,12 +80,21 @@
         var map = new maplibregl.Map({
             center: [11.5, 59.2],
             container: 'map',
+            pitch: 60,
             hash: true,
             style: 'https://vectortiles.kartverket.no/styles/test/landtopo/style.json',
             zoom: 13,
+            maxZoom: 18.75,
+            maxPitch: 85,
         })
-        map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-left')
-        map.setMaxZoom(18.75)
+
+        map.addControl(
+            new maplibregl.NavigationControl({ 
+                visualizePitch: true,
+                showZoom: true,
+                showCompass: true
+            }), 'top-left')
+        
 
         map.on('mousemove', function (event) {
             position.innerHTML = event.lngLat.lng.toFixed(6) + ',' + event.lngLat.lat.toFixed(6)
@@ -96,7 +112,7 @@
             isLoading = true
             buildings.disabled = 'disabled'
             placenames.disabled = 'disabled'
-            map.setStyle('https://vectortiles.kartverket.no/styles/test/landtopo/' + event.target.value )
+            map.setStyle('https://vectortiles.kartverket.no/styles/test/' + event.target.value + '/style.json')
         })
 
         buildings.addEventListener('change', function (event) {
