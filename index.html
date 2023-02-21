@@ -21,15 +21,16 @@
             <div class="card-body">
                 <div class="form-group">
                     <select class="custom-select custom-select-sm" id="styles">
-                        <option value="landtopo">Topografisk norgeskart</option>
-                        <option value="landtopo_graatone">Topografisk gråtone</option>
-                        <option value="norges_grunnkart">Norges grunnkart</option>
-                        <option value="adm_enheter">Administrative enheter</option>
-                        <option value="enkel">Enkel</option>
-                        <option value="tekst">Tekst</option>
+                        <option value="v1/landtopo">Topografisk norgeskart (v1) </option>
+                        <option value="test/landtopo">Topografisk norgeskart (test)</option>
+                        <option value="test/landtopo_graatone">Topografisk gråtone (test)</option>
+                        <option value="test/norges_grunnkart">Norges grunnkart (test)</option>
+                        <option value="test/adm_enheter">Administrative enheter (test)</option>
+                        <option value="test/enkel">Enkel (test)</option>
+                        <option value="test/tekst">Tekst (test)</option>
                         
-                        <option value="arcticsdi">ARCTIC SDI - dev</option>
-                        <option value="wip">Test</option>
+                        <option value="test/arcticsdi">ARCTIC SDI (dev!)</option>
+                        <option value="test/wip">wip (test)</option>
 
                     </select>
                 </div>
@@ -112,7 +113,7 @@
             isLoading = true
             buildings.disabled = 'disabled'
             placenames.disabled = 'disabled'
-            map.setStyle('https://vectortiles.kartverket.no/styles/test/' + event.target.value + '/style.json')
+            map.setStyle('https://vectortiles.kartverket.no/styles/' + event.target.value + '/style.json')
         })
 
         buildings.addEventListener('change', function (event) {

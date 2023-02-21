@@ -19,10 +19,13 @@
   },
   "devDependencies": {
     "buffer": "^5.7.1",
-    "parcel": "^2.8.0"
+    "parcel": "^2.8.0",
+    "gh-pages": "^5.0.0"
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build --public-url . index.html"
+    "build": "parcel build --public-url . index.html",
+    "predeploy": "parcel build ./*.html --public-url https://github.com/kartverket/vectorTilesDemo",
+    "deploy": "gh-pages -d dist"
   }
 }
